@@ -8,7 +8,7 @@ SECRET_KEY = os.getenv(
     "change-this-secret-key"
 )
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
