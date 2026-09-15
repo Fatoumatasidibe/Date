@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Une proposition</title>
+  <link rel="stylesheet" href="{% static 'love/style.css' %}">
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+
+  <main class="page">
+    <section class="hero reveal">
+      <p class="eyebrow">UNE PROPOSITION UN PEU PARTICULIÈRE</p>
+      <h1>Je peux te <br><span>date ?</span></h1>
+      <p class="intro">J'ai préparé quelque chose pour nous.<br>À toi de choisir la suite.</p>
+      <a href="#proposal" class="start">COMMENCER <span>↓</span></a>
+    </section>
+
+    <section id="proposal" class="proposal">
+      <div class="section-label">01 / CHOISIS NOTRE SOIRÉE</div>
+      <h2>Si on avait<br><em>un rendez-vous...</em></h2>
+
+      <form action="{% url 'answer' %}" method="post" id="dateForm">
+        {% csrf_token %}
+
+        <div class="cards">
+          <label class="date-card">
+            <input type="radio" name="choice" value="Cinéma" required>
+            <div class="card-inner">
+              <span class="number">01</span>
+              <div class="line-icon cinema"></div>
+              <h3>Cinéma</h3>
+              <p>Un film,<br>et probablement trop de popcorn.</p>
+              <span class="choose">CHOISIR</span>
+            </div>
+          </label>
+
+          <label class="date-card">
+            <input type="radio" name="choice" value="Picnic">
+            <div class="card-inner">
+              <span class="number">02</span>
+              <div class="line-icon picnic"></div>
+              <h3>Picnic</h3>
+              <p>Une couverture, quelque chose<br>à manger et nous.</p>
+              <span class="choose">CHOISIR</span>
+            </div>
+          </label>
+
+          <label class="date-card">
+            <input type="radio" name="choice" value="Glace">
+            <div class="card-inner">
+              <span class="number">03</span>
+              <div class="line-icon ice"></div>
+              <h3>Une glace</h3>
+              <p>Une promenade tranquille,<br>une glace et beaucoup de discussions.</p>
+              <span class="choose">CHOISIR</span>
+            </div>
+          </label>
+
+          <label class="date-card">
+            <input type="radio" name="choice" value="Hôtel">
+            <div class="card-inner">
+              <span class="number">04</span>
+              <div class="line-icon hotel"></div>
+              <h3>Hôtel</h3>
+              <p>...<br>juste nous deux.</p>
+              <span class="choose">CHOISIR</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="details reveal">
+          <div class="section-label">02 / À TOI DE CHOISIR</div>
+          <h2>Alors...<br><em>on fait ça quand ?</em></h2>
+
+          <div class="fields">
+            <div class="field">
+              <label for="date">LA DATE DE NOTRE RENDEZ-VOUS</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+          </div>
+
+          <div class="field message-field">
+            <label for="message">UN PETIT MOT POUR MOI</label>
+            <textarea id="message" name="message" rows="4" placeholder="Écris-moi quelque chose..."></textarea>
+          </div>
+
+          <button class="submit" type="submit">
+            <span>TA RÉPONSE</span>
+            <strong>ENVOYER</strong>
+            <i>↗</i>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div class="cursor-glow"></div>
+  <script src="{% static 'love/app.js' %}"></script>
+</body>
+</html>

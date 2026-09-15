@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réponse envoyée</title>
+  <link rel="stylesheet" href="{% static 'love/style.css' %}">
+</head>
+<body class="success-page">
+  <div class="grain"></div>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+
+  <main class="success">
+    {% if success %}
+      <p class="eyebrow">C'EST ENVOYÉ</p>
+      <h1>Alors...</h1>
+      <div class="big-word">C'EST UN<br><span>DATE.</span></div>
+      <p>Ta réponse vient d'arriver.<br>Maintenant, il ne reste plus qu'à se retrouver.</p>
+    {% else %}
+      <p class="eyebrow">PETIT PROBLÈME</p>
+      <h1>Ta réponse est<br><span>presque partie.</span></h1>
+      <p>Le site n'arrive pas encore à envoyer l'e-mail.<br>Vérifie la configuration Gmail dans <code>settings.py</code>.</p>
+    {% endif %}
+    <a href="{% url 'home' %}" class="start">REVENIR <span>↗</span></a>
+  </main>
+</body>
+</html>
