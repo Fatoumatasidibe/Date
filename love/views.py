@@ -1,8 +1,9 @@
-from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+import os
+
+import resend
+
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.utils.html import escape
 
 
 def home(request):
@@ -36,17 +37,22 @@ Petit mot :
 """
 
     try:
-        email = EmailMultiAlternatives(
-            subject="Une réponse pour notre date",
-            body=text_content,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[settings.DATE_RECIPIENT_EMAIL],
+        resend.api_key = os.environ["RESEND_API_KEY"]
+
+        resend.Emails.send(
+            {
+                "from": "PourSosu <onboarding@resend.dev>",
+                "to": ["sidfatou00@gmail.com"],
+                "subject": "Une réponse pour notre date",
+                "html": html_content,
+                "text": text_content,
+            }
         )
-        email.attach_alternative(html_content, "text/html")
-        email.send(fail_silently=False)
+
         success = True
+
     except Exception as exc:
-        print("EMAIL ERROR:", exc)
+        print("RESEND ERROR:", repr(exc))
         success = False
 
     return render(request, "love/sent.html", {"success": success})
