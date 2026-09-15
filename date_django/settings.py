@@ -1,14 +1,25 @@
+
 from pathlib import Path
 import os
 
+
+# ============================
+# BASE
+# ============================
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+# ============================
+# SECURITY
+# ============================
 
 SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
     "change-this-secret-key"
 )
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -30,7 +41,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
+    # Sert les fichiers CSS / JS / images en production
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
 ]
@@ -41,6 +55,11 @@ MIDDLEWARE = [
 # ============================
 
 ROOT_URLCONF = "date_django.urls"
+
+
+# ============================
+# TEMPLATES
+# ============================
 
 TEMPLATES = [
     {
@@ -54,6 +73,11 @@ TEMPLATES = [
         },
     },
 ]
+
+
+# ============================
+# WSGI
+# ============================
 
 WSGI_APPLICATION = "date_django.wsgi.application"
 
@@ -88,16 +112,20 @@ USE_TZ = True
 # ============================
 
 STATIC_URL = "/static/"
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
+
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
 
 # ============================
 # DEFAULT
@@ -118,19 +146,28 @@ EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
 
+
+# Gmail utilisé pour envoyer les réponses
 EMAIL_HOST_USER = os.getenv(
     "EMAIL_HOST_USER",
     "sidfatou00@gmail.com"
 )
 
+
+# NE PAS mettre le mot de passe Gmail ici.
+# Utilise un Google App Password via variable d'environnement.
 EMAIL_HOST_PASSWORD = os.getenv(
     "EMAIL_HOST_PASSWORD",
     ""
 )
 
+
+# Adresse qui reçoit les réponses
 DATE_RECIPIENT_EMAIL = os.getenv(
     "DATE_RECIPIENT_EMAIL",
     "sidfatou00@gmail.com"
 )
 
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
